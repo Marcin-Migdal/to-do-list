@@ -1,8 +1,29 @@
 import React, { useEffect, useState } from 'react'
+import TaskBox from './components/TaskBox/TaskBox';
 import './App.css';
 
 function App() {
-  const [toDoList, setToDoList] = useState(['e','e']);
+  const [toDoList, setToDoList] = useState(
+    [
+      {
+        title: 'make dinner make dinner make dinner make dinner ',
+        description: 'Make spagetti for whole family andke spagetti for whole family andke spagetti for whole family andke spagetti for whole family andke spagetti for whole family andke spagetti for whole family andke spagetti for whole family andke spagetti for whole family andke spagetti for whole family andke spagetti for whole family and friends'
+      },
+      {
+        title: 'make dinner',
+        description: 'Make spagetti for whole family'
+      },
+      {
+        title: 'make dinner',
+      },
+      {
+        title: 'make dinner',
+        description: 'Make spagetti for whole family'
+      },
+      {
+        title: 'make dinner',
+      }
+    ]);
   const [taskCountText, setTaskCountText] = useState();
 
   useEffect(() => {
@@ -25,31 +46,26 @@ function App() {
     }
 
     checkToDolist()
-  }, []);
+  }, [toDoList]);
 
-  const TaskList = () => {
-    const taskList = []
-
-    toDoList.map((task, index) => {
-      taskList.push(
-        <div key={index} className="addTaskBox">
-          {task}
-        </div>
-      )
-    })
-
-    return taskList
+  const addNewTask = () => {
+    console.log('add task')
   }
 
   return (
     <div className="container">
       <p className="title">Forgetto</p>
       <p className="description">
-        Just save your tasks to <br className='mobileNewLine' /> NOT forget them!
+        Save your tasks to <br className='mobileNewLine' /> NOT forget them!
       </p>
       <div className="taskContainer">
-        <div className="addTaskBox">+</div>
-        <TaskList />
+        <TaskBox
+          task={{ title: '+' }}
+          onClick={addNewTask}
+          isAddNewTaskBox={true} />
+        {
+          toDoList.map((task, index) => { return <TaskBox key={index} task={task} /> })
+        }
       </div>
       {taskCountText}
     </div>

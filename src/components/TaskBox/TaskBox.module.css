@@ -1,0 +1,200 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  margin: 0 0.35rem 0.5rem 0.35rem; 
+}
+
+.container:last-of-type {
+  margin-bottom: 0;
+}
+
+.extendedTaskBox,
+.taskBox {
+  display: flex;
+  flex-direction: column;
+  height: 3rem;
+  width: 100%;
+  margin-right: 0.5rem;
+  padding: 0 0.4rem;
+  border: 1px solid #cccccc;
+  box-shadow: 1px 1px 3px #888;
+  color: #777;
+  background-color: #fff;
+  overflow: hidden;
+  transition: 0.5s;
+}
+
+.extendedTaskBox:active,
+.taskBox:active {
+  border-color: #999999;
+  box-shadow: 2px 2px 3px #444;
+  background-color: #f2f2f2;
+  color: #333;
+  transition: 0.25s;
+}
+
+.extendedTaskBox {
+  height: 9rem;
+}
+
+.container:first-of-type .taskBox {
+  margin-right: 0;
+}
+
+.container:first-of-type .mainBoxContainer {
+  margin-top: 0;
+}
+
+.mainBoxContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.addNewTaskTitle {
+  text-align: center;
+  width: 100%;
+  font-size: 2.5rem;
+  margin-top: -0.25rem;
+}
+
+.title {
+  font-size: 1.35rem;
+  margin-left: 0.2rem;
+  text-transform: capitalize;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.editButton {
+  display: block;
+  padding: 0.15rem 0.5rem;
+  margin-right: 0.4rem;
+  outline: none;
+  border: none;
+  color: #ffffff;
+  background-color: #ffb340;
+  font-size: 1.1rem;
+  transform: 0.5s;
+}
+
+.editButton:active {
+  background-color: #ff9900;
+  transform: 0.25s;
+}
+
+.descriptionContainer {
+  width: 100%;
+  margin-top: 0.3rem;
+  padding: 0.4rem 0.4rem 0 0.2rem;
+  border: 0 solid #999;
+  border-top-width: 2px;
+}
+
+.description {
+  display: inline-block;
+  height: 5rem;
+  font-size: 1.1rem;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.completeButton {
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  padding: 0 0.5rem;
+  outline: none;
+  border: none;
+  background-color: #51d451;
+  box-shadow: 1px 1px 3px #888;
+  transition: 0.5s;
+}
+
+.completeButton:active {
+  background-color: #2eb82e;
+  box-shadow: 1px 1px 4px #444;
+  transition: 0.2s;
+}
+
+.completeIcon {
+  width: 1.75rem;
+}
+
+@media only screen and (min-width: 600px) {
+  .container {
+    margin: 0 0.5rem 0.5rem 0.5rem; 
+  }
+  .extendedTaskBox,
+  .taskBox {
+    height: 3rem;
+    cursor: pointer;
+  }
+
+  .taskBox:hover {
+    border-color: #b3b3b3;
+    box-shadow: 2px 2px 5px #666;
+    background-color: #f8f8f8;
+    color: #555;
+    transition: 0.4s;
+  }
+  .extendedTaskBox:active,
+  .taskBox:active {
+    border-color: #999999;
+    box-shadow: 2px 2px 7px #444;
+    background-color: #f2f2f2;
+    color: #333;
+    transition: 0.2s;
+  }
+
+  .extendedTaskBox {
+    height: 9rem;
+  }
+
+  .container:first-of-type .taskBox {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .addNewTaskTitle {
+    font-size: 2.75rem;
+    margin: 0;
+  }
+
+  .title {
+    font-size: 1.45rem;
+  }
+
+  .editButton {
+    cursor: pointer;
+  }
+
+  .descriptionContainer {
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 0.4rem 0.4rem 0 0.2rem;
+  }
+
+  .description {
+    height: 5rem;
+  }
+
+  .completeButton:hover {
+    background-color: #2eb82e;
+    box-shadow: 2px 2px 5px #666;
+    transition: 0.4s;
+  }
+
+  .completeButton:active {
+    background-color: #29a329;
+    box-shadow: 2px 2px 7px #444;
+    transition: 0.2s;
+  }
+
+  .completeIcon {
+    width: 2rem;
+  }
+}

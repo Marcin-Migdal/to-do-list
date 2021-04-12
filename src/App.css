@@ -10,8 +10,82 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 3rem 0;
+  color: #4d4d4d;
+  font-weight: 600;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.description {
+  width: 80%;
+  margin: 1.5rem 2rem 0 2rem;
+  padding: 0.25rem 1rem;
+  padding-top: 0;
+  border: 0 solid #000;
+  border-bottom-width: 2px;
+  text-align: center;
+  font-size: 1.55rem;
+  font-weight: 600;
+}
+
+.taskContainer {
+  width: 90%;
+  margin-top: 1rem;
+  padding: 0.5rem 0;
+  padding-left: 6px;
+  border: 1px solid #cccccc;
+  box-shadow: 2px 2px 6px #555;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.taskCountText {
+  margin-top: 0.75rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #999;
 }
 
 @media only screen and (min-width: 600px) {
+  .container {
+    padding: 2.5rem;
+  }
 
+  .description {
+    width: auto;
+    margin-top: 1.25rem;
+  }
+
+  .mobileNewLine {
+    display: none;
+  }
+
+  .taskContainer {
+    width: 30rem;
+    max-height: 60vh;
+    margin-top: 1.25rem;
+  }
+
+  .taskCountText {
+    font-size: 1.5rem;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .taskContainer {
+    width: 40rem;
+  }
 }

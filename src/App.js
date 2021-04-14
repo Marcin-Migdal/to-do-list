@@ -1,30 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import TaskBox from './components/TaskBox/TaskBox';
 import './App.css';
+import AddTaskForm from './components/AddTaskFrom/AddTaskForm';
 
 function App() {
-  const [toDoList, setToDoList] = useState(
-    [
-      {
-        title: 'make dinner make dinner make dinner make dinner ',
-        description: 'Make spagetti for whole family andke spagetti for whole family andke spagetti for whole family andke spagetti for whole family andke spagetti for whole family andke spagetti for whole family andke spagetti for whole family andke spagetti for whole family andke spagetti for whole family andke spagetti for whole family and friends'
-      },
-      {
-        title: 'make dinner',
-        description: 'Make spagetti for whole family'
-      },
-      {
-        title: 'make dinner',
-      },
-      {
-        title: 'make dinner',
-        description: 'Make spagetti for whole family'
-      },
-      {
-        title: 'make dinner',
-      }
-    ]);
+  const [isFormVisible, setIsFormVisible] = useState(false);
   const [taskCountText, setTaskCountText] = useState();
+
+  const [toDoList, setToDoList] = useState([]);
 
   useEffect(() => {
     const checkToDolist = () => {
@@ -48,8 +31,18 @@ function App() {
     checkToDolist()
   }, [toDoList]);
 
-  const addNewTask = () => {
-    console.log('add task')
+  const addNewTask = (addedTask) => {
+    const task = {
+      title: addedTask.taskName,
+      description: addedTask.taskDescription
+    }
+
+    setToDoList([...toDoList, task])
+    toogleForm()
+  }
+
+  const toogleForm = () => {
+    setIsFormVisible(!isFormVisible)
   }
 
   return (
@@ -58,16 +51,20 @@ function App() {
       <p className="description">
         Save your tasks to <br className='mobileNewLine' /> NOT forget them!
       </p>
-      <div className="taskContainer">
-        <TaskBox
-          task={{ title: '+' }}
-          onClick={addNewTask}
-          isAddNewTaskBox={true} />
-        {
-          toDoList.map((task, index) => { return <TaskBox key={index} task={task} /> })
-        }
+      <div className={isFormVisible ? "subContainer open" : "subContainer"}>
+        <AddTaskForm isFormVisible={isFormVisible} addNewTask={addNewTask} />
+        <div className={isFormVisible ? "taskList slideLeft" : "taskList"}>
+          <TaskBox
+            task={{ title: '+' }}
+            onClick={toogleForm}
+            isAddNewTaskBox={true} />
+          {
+            toDoList.map((task, index) => { return <TaskBox key={index} task={task} /> })
+          }
+          {toDoList.length < 7 && taskCountText}
+        </div>
       </div>
-      {taskCountText}
+      {toDoList.length >= 7 && taskCountText}
     </div>
   );
 }

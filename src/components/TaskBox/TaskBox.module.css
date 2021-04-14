@@ -84,6 +84,7 @@
 .editButton:active {
   background-color: #ff9900;
   transform: 0.25s;
+  transform: scale(0.95);
 }
 
 .descriptionContainer {
@@ -118,6 +119,7 @@
   background-color: #2eb82e;
   box-shadow: 1px 1px 4px #444;
   transition: 0.2s;
+  transform: scale(0.95);
 }
 
 .completeIcon {

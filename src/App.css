@@ -6,6 +6,10 @@
   font-family: "Open Sans", sans-serif;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -33,8 +37,23 @@
   font-weight: 600;
 }
 
-.taskContainer {
-  width: 90%;
+.subContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 30rem;
+  position: relative;
+  overflow: hidden;
+  transition: 0.5s;
+}
+
+.taskList {
+  position: absolute;
+  top: 0;
+  left: auto;
+  width: 95%;
+  height: fit-content;
+  max-height: 28.75rem;
   margin-top: 1rem;
   padding: 0.5rem 0;
   padding-left: 6px;
@@ -42,6 +61,8 @@
   box-shadow: 2px 2px 6px #555;
   overflow: scroll;
   overflow-x: hidden;
+  transition: 0.5s;
+  background-color: #fff;
 }
 
 .taskCountText {
@@ -73,10 +94,22 @@
     display: none;
   }
 
-  .taskContainer {
-    width: 30rem;
-    max-height: 60vh;
-    margin-top: 1.25rem;
+  .subContainer {
+    height: 30rem;
+    width: 24rem;
+  }
+
+  .subContainer.open {
+    width: 39rem;
+  }
+
+  .taskList {
+    width: 22rem;
+    left: 2.5%;
+  }
+
+  .taskList.slideLeft {
+    left: 0;
   }
 
   .taskCountText {
@@ -84,8 +117,30 @@
   }
 }
 
+@media only screen and (min-width: 800px) {
+  .subContainer {
+    width: 32rem;
+  }
+
+  .subContainer.open {
+    width: 47rem;
+  }
+
+  .taskList {
+    width: 30rem;
+  }
+}
+
 @media only screen and (min-width: 1200px) {
-  .taskContainer {
+  .subContainer {
+    width: 42rem;
+  }
+
+  .subContainer.open {
+    width: 62rem;
+  }
+
+  .taskList {
     width: 40rem;
   }
 }

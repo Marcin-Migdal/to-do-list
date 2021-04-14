@@ -1,0 +1,109 @@
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  width: 75%;
+  padding: 2.5%;
+  left: 12.5%;
+  top: -100%;
+  background-color: #fff;
+  box-shadow: 2px 2px 6px #555;
+  transition: 0.5s;
+  z-index: 2;
+}
+
+.formContainer.open {
+  top: 7%;
+}
+
+.title {
+  width: 100%;
+  text-align: center;
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.descriptionInput,
+.taskNameInput {
+  outline: none;
+  border: 1px solid #d9d9d9;
+  width: 95%;
+  padding: 0.25rem 0.5rem;
+  box-shadow: 1px 1px 3px #777;
+  margin-bottom: 0.5rem;
+  transition: 0.5s;
+}
+
+.descriptionInput:focus,
+.taskNameInput:focus{
+  border: 1px solid #b3b3b3;
+  box-shadow: 2px 2px 5px #555;
+}
+
+.descriptionInput {
+  height: 6.5rem;
+  margin-bottom: 0.75rem;
+  resize: none;
+}
+
+.button {
+  outline: none;
+  border: none;
+  padding: 0.35rem 0.5rem;
+  background-color: #666;
+  font-size: 1.1rem;
+  color: #fff;
+  transition: 0.4s;
+}
+
+@media only screen and (min-width: 600px) {
+  .formContainer {
+    height: 1rem;
+    width: 15rem;
+    padding: 0;
+    box-shadow: none;
+    left: 20%;
+    top: 3.75%;
+    z-index: 0;
+  }
+
+  .formContainer.open {
+    height: 15rem;
+    padding: 1% 0.5%;
+    box-shadow: 2px 2px 6px #666;
+    left: 22.5rem;
+    top: 3.5%;
+  }
+
+  .button:hover {
+    background-color: #444;
+    color: #fff;
+  }
+
+  .button:active {
+    background-color: #222;
+    color: #fff;
+    transform: scale(0.95);
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .formContainer {
+    left: 40%;
+  }
+
+  .formContainer.open {
+    left: 30.5rem;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .formContainer {
+    width: 20rem;
+  }
+
+  .formContainer.open {
+    left: 40.75rem;
+  }
+}

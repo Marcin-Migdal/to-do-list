@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styles from './TaskBox.module.css'
 import completeIcon from '../../resourses/completeIcon.png'
+import { DataContext } from '../DataProvider/DataProvider';
 
 export default function TaskBox({ task, onClick, isAddNewTaskBox }) {
+  const [toDoList, setToDoList] = useContext(DataContext);
+
   const [isExtended, setIsExtended] = useState(false);
 
   const handleClick = () => {
@@ -13,8 +16,7 @@ export default function TaskBox({ task, onClick, isAddNewTaskBox }) {
     }
   }
 
-  const editTask = (e) => {
-    e.stopPropagation();
+  const editTask = () => {
     console.log('edit task')
   }
 

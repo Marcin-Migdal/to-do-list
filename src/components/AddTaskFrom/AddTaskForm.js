@@ -1,39 +1,48 @@
-import React, { useRef } from 'react'
+import React, { useState, useContext } from 'react'
 import styles from './AddTaskForm.module.css'
+import { DataContext } from '../DataProvider/DataProvider';
 
-export default function AddTaskForm({ isFormVisible, addNewTask }) {
-  const taskNameRef = useRef();
-  const taskDescriptionRef = useRef();
+export default function AddTaskForm({ isFormVisible, closeForm }) {
+  const [taskName, setTaskName] = useState('');
+  const [taskDescription, setTaskDescription] = useState('');
 
-  const handleAddTask = () => {
-    if (taskNameRef.current.value) {
+  const [toDoList, setToDoList] = useContext(DataContext);
+
+  const addTask = (e) => {
+    e.preventDefault();
+    if (taskName) {
       const addedTask = {
-        taskName: taskNameRef.current.value,
-        taskDescription: taskDescriptionRef.current.value
+        title: taskName,
+        description: taskDescription,
+        completed: false,
       }
 
-      addNewTask(addedTask)
+      setToDoList([...toDoList, addedTask])
 
-      taskNameRef.current.value = ''
-      taskDescriptionRef.current.value = ''
+      setTaskName('')
+      setTaskDescription('')
+      closeForm()
     }
   }
 
   return (
-    <div className={isFormVisible ? `${styles.formContainer} ${styles.open}` : styles.formContainer}>
+    <form autoComplete="off" onSubmit={addTask}
+      className={isFormVisible ? `${styles.formContainer} ${styles.open}` : styles.formContainer}>
       <p className={styles.title}>Add Task</p>
       <input
-        ref={el => taskNameRef.current = el}
         className={styles.taskNameInput}
         type="text"
-        placeholder="Task name" />
+        placeholder="Task name"
+        value={taskName}
+        onChange={e => setTaskName(e.target.value)} />
       <textarea
-        ref={el => taskDescriptionRef.current = el}
         className={styles.descriptionInput}
-        placeholder="Description (optional)" />
-      <button className={styles.button} onClick={handleAddTask} >
+        placeholder="Description (optional)"
+        value={taskDescription}
+        onChange={e => setTaskDescription(e.target.value)} />
+      <button type="submit" className={styles.button} >
         Add task
       </button>
-    </div >
+    </form >
   )
 }

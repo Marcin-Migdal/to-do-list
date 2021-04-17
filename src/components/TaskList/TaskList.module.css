@@ -1,0 +1,45 @@
+.taskList {
+  position: absolute;
+  top: 0;
+  left: auto;
+  width: 95%;
+  height: fit-content;
+  max-height: 28.75rem;
+  margin-top: 1rem;
+  padding: 0.5rem 0;
+  padding-left: 6px;
+  border: 1px solid #cccccc;
+  box-shadow: 2px 2px 6px #555;
+  overflow: scroll;
+  overflow-x: hidden;
+  transition: 0.5s;
+  background-color: #fff;
+  list-style: none;
+}
+
+@media only screen and (min-width: 600px) {
+  .taskList {
+    width: 22rem;
+    left: 2.5%;
+  }
+
+  .taskList.slideLeft {
+    left: 0;
+  }
+  
+  .taskCountText {
+    font-size: 1.5rem;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .taskList {
+    width: 30rem;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .taskList {
+    width: 40rem;
+  }
+}

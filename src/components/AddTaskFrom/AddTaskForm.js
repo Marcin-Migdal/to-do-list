@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react'
 import styles from './AddTaskForm.module.css'
 import { DataContext } from '../DataProvider/DataProvider';
+import { nanoid } from "nanoid";
 
 export default function AddTaskForm({ isFormVisible, closeForm }) {
   const [taskName, setTaskName] = useState('');
@@ -10,8 +11,10 @@ export default function AddTaskForm({ isFormVisible, closeForm }) {
 
   const addTask = (e) => {
     e.preventDefault();
+
     if (taskName) {
       const addedTask = {
+        id: nanoid(),
         title: taskName,
         description: taskDescription,
         completed: false,

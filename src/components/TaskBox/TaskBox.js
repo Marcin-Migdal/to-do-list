@@ -21,7 +21,10 @@ export default function TaskBox({ task, onClick, isAddNewTaskBox }) {
   }
 
   const completeTask = () => {
-    console.log('complete task')
+    const newToDoList = toDoList.filter(toDoTask => {
+      return task.id != toDoTask.id
+    })
+    setToDoList(newToDoList)
   }
 
   return (

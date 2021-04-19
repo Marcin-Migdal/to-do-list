@@ -1,11 +1,19 @@
 import React, { useContext, useState } from 'react'
 import styles from './TaskBox.module.css'
 import completeIcon from '../../resourses/completeIcon.png'
-import { DataContext } from '../DataProvider/DataProvider';
+import { DataContext, EditTaskContext, FormContext } from '../ContextProvider/ContextProvider';
 
-export default function TaskBox({ task, toogleAsEditForm, isFormVisible }) {
+export default function TaskBox({ task }) {
   const [toDoList, setToDoList] = useContext(DataContext);
+  const [isFormVisible, setIsFormVisible] = useContext(FormContext);
+  const [taskToEdit, setTaskToEdit] = useContext(EditTaskContext);
+
   const [isExtended, setIsExtended] = useState(false);
+
+  const toogleAsEditForm = (task) => {
+    setTaskToEdit(task)
+    isFormVisible ? setIsFormVisible(false) : setIsFormVisible('edit')
+  }
 
   const handleClick = () => {
     if (task.description) {

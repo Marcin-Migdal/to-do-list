@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { DataProvider } from './components/DataProvider/DataProvider';
+import { ContextProvider } from './components/ContextProvider/ContextProvider';
 
 ReactDOM.render(
   <React.StrictMode>
-    <DataProvider>
+    <ContextProvider>
       <App />
-    </DataProvider>
+    </ContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

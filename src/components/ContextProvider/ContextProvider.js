@@ -1,9 +1,13 @@
 import React, { useState, useEffect, createContext } from 'react'
 
 export const DataContext = createContext()
+export const FormContext = createContext()
+export const EditTaskContext = createContext()
 
-export const DataProvider = (props) => {
+export const ContextProvider = (props) => {
   const [toDoList, setToDoList] = useState([]);
+  const [isFormVisible, setIsFormVisible] = useState(false);
+  const [taskToEdit, setTaskToEdit] = useState();
 
   useEffect(() => {
     const toDoListStore = JSON.parse(localStorage.getItem('toDoListStore'));
@@ -16,7 +20,11 @@ export const DataProvider = (props) => {
 
   return (
     <DataContext.Provider value={[toDoList, setToDoList]}>
-      {props.children}
+      <FormContext.Provider value={[isFormVisible, setIsFormVisible]}>
+        <EditTaskContext.Provider value={[taskToEdit, setTaskToEdit]}>
+          {props.children}
+        </EditTaskContext.Provider>
+      </FormContext.Provider>
     </DataContext.Provider >
   )
 }

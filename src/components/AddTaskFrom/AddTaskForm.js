@@ -1,11 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react'
 import styles from './AddTaskForm.module.css'
-import { DataContext } from '../DataProvider/DataProvider';
+import { DataContext, EditTaskContext, FormContext } from '../ContextProvider/ContextProvider';
 import { nanoid } from "nanoid";
 import backArrow from '../../resourses/backArrow.png'
 
-export default function AddTaskForm({ isFormVisible, closeForm, taskToEdit }) {
+export default function AddTaskForm() {
   const [toDoList, setToDoList] = useContext(DataContext);
+  const [isFormVisible, setIsFormVisible] = useContext(FormContext);
+  const [taskToEdit] = useContext(EditTaskContext);
 
   const [taskName, setTaskName] = useState('');
   const [taskDescription, setTaskDescription] = useState('');
@@ -13,8 +15,6 @@ export default function AddTaskForm({ isFormVisible, closeForm, taskToEdit }) {
 
   useEffect(() => {
     const setUpForm = () => {
-      setTaskName('')
-      setTaskDescription('')
       if (isFormVisible === 'add') {
         setFormText('Add task')
       } else if (isFormVisible === 'edit') {
@@ -24,7 +24,15 @@ export default function AddTaskForm({ isFormVisible, closeForm, taskToEdit }) {
       }
     }
 
+    const cleanUpForm = () => {
+      setTimeout(() => {
+        setTaskName('')
+        setTaskDescription('')
+      }, 400);
+    }
+
     setUpForm()
+    !isFormVisible && cleanUpForm()
   }, [isFormVisible, taskToEdit]);
 
   const addTask = (e) => {
@@ -40,7 +48,6 @@ export default function AddTaskForm({ isFormVisible, closeForm, taskToEdit }) {
     }
 
     setToDoList([...toDoList, addedTask])
-
     closeForm()
   }
 
@@ -59,8 +66,11 @@ export default function AddTaskForm({ isFormVisible, closeForm, taskToEdit }) {
     })
 
     setToDoList(newToDoList)
-
     closeForm()
+  }
+
+  const closeForm = () => {
+    setIsFormVisible(false)
   }
 
   return (

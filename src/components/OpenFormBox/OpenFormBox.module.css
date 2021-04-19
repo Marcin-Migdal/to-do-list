@@ -1,0 +1,67 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  margin: 0 0.35rem 0.5rem 0.35rem; 
+}
+
+.openFormBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+  width: 100%;
+  padding: 0 0.4rem;
+  border: 1px solid #cccccc;
+  outline: none;
+  box-shadow: 1px 1px 3px #888;
+  color: #777;
+  background-color: #fff;
+  overflow: hidden;
+  transition: 0.5s;
+}
+
+.openFormBox:active { 
+  border-color: #999999;
+  box-shadow: 2px 2px 3px #444;
+  background-color: #f2f2f2;
+  color: #333;
+  transition: 0.2s;
+}
+
+.text {
+  font-size: 2.5rem;
+  margin-top: -0.25rem;
+}
+
+
+@media only screen and (min-width: 600px) {
+  .container {
+    margin: 0 0.5rem 0.5rem 0.5rem; 
+  }
+
+  .openFormBox {
+    height: 3rem;
+    cursor: pointer;
+  }
+
+  .openFormBox:hover {
+    border-color: #b3b3b3;
+    box-shadow: 2px 2px 5px #666;
+    background-color: #f8f8f8;
+    color: #555;
+    transition: 0.4s;
+  }
+  
+  .openFormBox:active {
+    border-color: #999999;
+    box-shadow: 2px 2px 7px #444;
+    background-color: #f2f2f2;
+    color: #333;
+    transition: 0.2s;
+  }
+
+  .text {
+    font-size: 2.75rem;
+    margin: 0;
+  }
+}

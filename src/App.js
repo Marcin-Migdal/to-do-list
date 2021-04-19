@@ -7,15 +7,21 @@ import './App.css';
 
 function App() {
   const [toDoList] = useContext(DataContext);
+  const [taskToEdit, setTaskToEdit] = useState();
 
   const [isFormVisible, setIsFormVisible] = useState(false);
 
-  const toogleForm = () => {
-    setIsFormVisible(!isFormVisible)
-  }
-
   const closeForm = () => {
     setIsFormVisible(false)
+  }
+
+  const toogleAsAddForm = () => {
+    isFormVisible ? setIsFormVisible(false) : setIsFormVisible('add')
+  }
+
+  const toogleAsEditForm = (taskId) => {
+    setTaskToEdit(taskId) 
+    isFormVisible ? setIsFormVisible(false) : setIsFormVisible('edit')
   }
 
   return (
@@ -23,8 +29,8 @@ function App() {
       <h1 className="title">Forgetto</h1>
       <p className="description">Save your tasks to <br className='mobileNewLine' /> NOT forget them!</p>
       <div className={isFormVisible ? "subContainer open" : "subContainer"}>
-        <AddTaskForm isFormVisible={isFormVisible} closeForm={closeForm} />
-        <TaskList isFormVisible={isFormVisible} toogleForm={toogleForm} />
+        <AddTaskForm isFormVisible={isFormVisible} closeForm={closeForm} taskToEdit={taskToEdit} />
+        <TaskList isFormVisible={isFormVisible} toogleAsAddForm={toogleAsAddForm} toogleAsEditForm={toogleAsEditForm}/>
       </div>
       {toDoList.length >= 7 && <ListTaskCounter toDoListLength={toDoList.length} />}
     </div>

@@ -3,9 +3,8 @@ import styles from './TaskBox.module.css'
 import completeIcon from '../../resourses/completeIcon.png'
 import { DataContext } from '../DataProvider/DataProvider';
 
-export default function TaskBox({ task, onClick, isAddNewTaskBox }) {
+export default function TaskBox({ task, toogleAsEditForm, isFormVisible }) {
   const [toDoList, setToDoList] = useContext(DataContext);
-
   const [isExtended, setIsExtended] = useState(false);
 
   const handleClick = () => {
@@ -16,30 +15,40 @@ export default function TaskBox({ task, onClick, isAddNewTaskBox }) {
     }
   }
 
-  const editTask = () => {
-    console.log('edit task')
+  const editTask = (e, task) => {
+    e.stopPropagation();
+    toogleAsEditForm(task)
   }
 
   const completeTask = () => {
-    const newToDoList = toDoList.filter(toDoTask => {
-      return task.id != toDoTask.id
+    const newToDoList = [];
+
+    toDoList.map(toDoTask => {
+      if (toDoTask.id === task.id) {
+        task.completed = true;
+        newToDoList.push(task)
+      } else {
+        newToDoList.push(toDoTask)
+      }
     })
+
     setToDoList(newToDoList)
   }
 
   return (
-    <div className={styles.container}>
+    <div className={task.completed ? `${styles.container} ${styles.completed}` : styles.container}>
       <div
         className={isExtended ? styles.extendedTaskBox : styles.taskBox}
-        onClick={onClick ? onClick : handleClick}>
+        onClick={handleClick}>
         <div className={styles.mainBoxContainer}>
-          <p className={isAddNewTaskBox ? styles.addNewTaskTitle : styles.title}>{task.title}</p>
-          {!isAddNewTaskBox &&
+          <p className={styles.title}>{task.title}</p>
+          {!task.completed &&
             <button
+              disabled={isFormVisible === 'add'}
               className={styles.editButton}
-              onClick={editTask}>
+              onClick={(e) => { editTask(e, task) }}>
               Edit
-          </button>
+            </button>
           }
         </div>
         {(isExtended && task.description) &&
@@ -50,11 +59,12 @@ export default function TaskBox({ task, onClick, isAddNewTaskBox }) {
           </div>
         }
       </div>
-      {!isAddNewTaskBox &&
-        <button className={styles.completeButton} onClick={completeTask}>
-          <img className={styles.completeIcon} src={completeIcon} />
-        </button>
-      }
+      <button
+        onClick={completeTask}
+        className={(task.completed || isFormVisible === 'edit') ? styles.completeDisabledButton : styles.completeButton}
+        disabled={task.completed || isFormVisible === 'edit'}>
+        <img className={styles.completeIcon} src={completeIcon} />
+      </button>
     </div>
   )
 }

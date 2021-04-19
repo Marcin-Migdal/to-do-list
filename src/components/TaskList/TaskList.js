@@ -3,24 +3,25 @@ import TaskBox from '../TaskBox/TaskBox'
 import ListTaskCounter from '../ListTaskCounter/ListTaskCounter';
 import styles from './TaskList.module.css'
 import { DataContext } from '../DataProvider/DataProvider';
+import OpenFormBox from '../OpenFormBox/OpenFormBox';
 
-export default function TaskList({ toogleForm, isFormVisible }) {
+export default function TaskList({ isFormVisible, toogleAsAddForm, toogleAsEditForm }) {
   const [toDoList] = useContext(DataContext);
-
-  const ToggleFormBox = () => {
-    return (
-      <TaskBox
-        task={{ title: '+' }}
-        onClick={toogleForm}
-        isAddNewTaskBox={true} />
-    )
-  }
 
   return (
     <ul className={isFormVisible ? `${styles.taskList} ${styles.slideLeft}` : styles.taskList}>
-      <ToggleFormBox />
+      <OpenFormBox
+        toogleAsAddForm={toogleAsAddForm}
+        isFormVisible={isFormVisible} />
       {
-        toDoList.map((task, index) => { return <TaskBox key={index} task={task} /> })
+        toDoList.map((task, index) => {
+          return (
+            <TaskBox key={index}
+              task={task}
+              toogleAsEditForm={toogleAsEditForm}
+              isFormVisible={isFormVisible} />
+          )
+        })
       }
       {toDoList.length < 7 && <ListTaskCounter toDoListLength={toDoList.length} />}
     </ul >

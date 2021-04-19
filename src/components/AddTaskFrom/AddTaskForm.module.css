@@ -17,6 +17,30 @@
   top: 7%;
 }
 
+.iconContainer {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.2rem;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  transition: 0.5s;
+}
+
+.iconContainer:active {
+  background-color: #e6e6e6;
+  transition: 0.1s;
+}
+
+.backArrowIcon {
+  width: 1.25rem;
+  transform: rotate(90deg);
+}
+
 .title {
   width: 100%;
   text-align: center;
@@ -36,7 +60,7 @@
 }
 
 .descriptionInput:focus,
-.taskNameInput:focus{
+.taskNameInput:focus {
   border: 1px solid #b3b3b3;
   box-shadow: 2px 2px 5px #555;
 }
@@ -74,6 +98,30 @@
     box-shadow: 2px 2px 6px #666;
     left: 22.5rem;
     top: 3.5%;
+  }
+
+  .iconContainer {
+    left: 0.75rem;
+    right: auto;
+    cursor: pointer;
+  }
+
+  .iconContainer:hover {
+    background-color: #e6e6e6;
+    transition: 0.5s;
+  }
+
+  .iconContainer:active {
+    background-color: #cccccc;
+    transition: 0.2s;
+  }
+
+  .backArrowIcon {
+    transform: none;
+  }
+
+  .button {
+    cursor: pointer;
   }
 
   .button:hover {

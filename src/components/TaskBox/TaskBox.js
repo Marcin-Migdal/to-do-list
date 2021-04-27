@@ -1,11 +1,21 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styles from './TaskBox.module.css'
-import completeIcon from '../../resourses/completeIcon.png'
+import { EditTaskContext, FormContext } from '../ContextProvider/ContextProvider';
+import BigButton from '../BigButton/BigButton';
 
-export default function TaskBox({ task, onClick, isAddNewTaskBox }) {
+export default function TaskBox({ task, completeTask, selectTask }) {
+  const [isFormVisible, setIsFormVisible] = useContext(FormContext);
+  const { setTaskToEdit } = useContext(EditTaskContext);
+
   const [isExtended, setIsExtended] = useState(false);
 
-  const handleClick = () => {
+  const toogleAsEditForm = e => {
+    e.stopPropagation();
+    setTaskToEdit(task)
+    isFormVisible ? setIsFormVisible(false) : setIsFormVisible('edit')
+  }
+
+  const toggleExtendBox = () => {
     if (task.description) {
       setTimeout(() => {
         setIsExtended(!isExtended)
@@ -13,43 +23,40 @@ export default function TaskBox({ task, onClick, isAddNewTaskBox }) {
     }
   }
 
-  const editTask = (e) => {
-    e.stopPropagation();
-    console.log('edit task')
-  }
-
-  const completeTask = () => {
-    console.log('complete task')
-  }
-
   return (
     <div className={styles.container}>
       <div
         className={isExtended ? styles.extendedTaskBox : styles.taskBox}
-        onClick={onClick ? onClick : handleClick}>
-        <div className={styles.mainBoxContainer}>
-          <p className={isAddNewTaskBox ? styles.addNewTaskTitle : styles.title}>{task.title}</p>
-          {!isAddNewTaskBox &&
+        onClick={toggleExtendBox}>
+        <div className={styles.topBoxContainer}>
+          <div className={styles.leftTopBoxContainer}>
+            <input
+              type="checkbox"
+              className={styles.checkBox}
+              checked={task.selected}
+              onChange={() => selectTask(task.id)}
+              onClick={e => e.stopPropagation()} />
+            <p className={styles.title}>{task.title}</p>
+          </div>
+          {!task.completed &&
             <button
+              disabled={isFormVisible === 'add'}
               className={styles.editButton}
-              onClick={editTask}>
+              onClick={toogleAsEditForm}>
               Edit
-          </button>
+            </button>
           }
         </div>
-        {(isExtended && task.description) &&
-          <div className={styles.descriptionContainer}>
-            <span className={styles.description}>
-              {task.description}
-            </span>
-          </div>
-        }
+        <div className={styles.bottomBoxContainer}>
+          <span className={styles.description}>
+            {task.description}
+          </span>
+        </div>
       </div>
-      {!isAddNewTaskBox &&
-        <button className={styles.completeButton} onClick={completeTask}>
-          <img className={styles.completeIcon} src={completeIcon} />
-        </button>
-      }
+      <BigButton
+        onClick={() => completeTask(task.id)}
+        isFormVisible={isFormVisible}
+        isComplete={task.completed} />
     </div>
   )
 }

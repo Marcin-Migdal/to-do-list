@@ -1,0 +1,65 @@
+.taskListContainer {
+  position: absolute;
+  width: 95%;
+  border: 1px solid #cccccc;
+  box-shadow: 2px 2px 6px #777;
+  transition: 0.5s;
+  background-color: #fff;
+}
+
+.taskList {
+  height: fit-content;
+  max-height: 21.5rem;
+  width: 100%;
+  padding: 0.5rem 0;
+  list-style: none;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.taskNotyficationText {
+  text-align: center;
+  margin: 0.5rem;
+}
+
+.myHr {
+  border: none;
+  outline: none;
+  background-color: #bfbfbf;
+  width: 97%;
+  height: 1px;
+  margin: auto;
+}
+
+@media only screen and (min-width: 600px) {
+  .taskListContainer {
+    width: 22rem;
+    left: 4.25%;
+  }
+
+  .taskListContainer.slideLeft {
+    left: 0;
+  }
+
+  .taskNotyficationText {
+    font-size: 1.5rem;
+  }
+
+  .myHr { 
+    height: 2px; 
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .taskListContainer {
+    width: 30rem;
+    left: 3.25%;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .taskListContainer {
+    width: 40rem;
+    left: 2.42%;
+  }
+}

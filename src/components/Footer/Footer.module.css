@@ -1,0 +1,59 @@
+.footerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.35rem 0;
+  margin-left: calc(6px + 1rem);
+  margin-right: calc(6px + 0.35rem);
+  font-size: 1.35rem;
+}
+
+.checkBox {
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+.buttonContainer {
+  display: flex;
+}
+
+.rightFooterContainer {
+  display: flex;
+  align-items: center;
+}
+
+.dropDownMenu {
+  height: fit-content;
+  margin-right: 0.5rem;
+  outline: none;
+  border-color: #a6a6a6;
+  box-shadow: 1px 1px 2px #999;
+  padding: 0.15rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: inherit;
+  background-color: #fff;
+  transition: 0.5s;
+}
+
+.dropDownMenu:active {
+  background-color: #d9d9d9;
+  transition: 0.1s;
+}
+
+.dropDownMenuItem {
+  background-color: #fff;
+}
+
+@media only screen and (min-width: 600px) {
+  .footerContainer {
+    margin: 0.5rem 0;
+    margin-left: calc(7px + 1.1rem);
+    margin-right: calc(6px + 0.5rem);
+  }
+
+  .dropDownMenu:active {
+    background-color: #d9d9d9;
+    transition: 0.1s;
+  }
+}

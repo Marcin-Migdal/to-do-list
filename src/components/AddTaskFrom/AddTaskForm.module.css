@@ -85,19 +85,16 @@
 
 @media only screen and (min-width: 600px) {
   .formContainer {
-    height: 1rem;
+    height: 15rem;
     width: 15rem;
-    padding: 0;
-    box-shadow: none;
+    padding: 1% 0.5%;
+    box-shadow: 2px 2px 6px #666;
     left: 20%;
-    top: -13%;
+    top: -30%;
     z-index: 0;
   }
 
   .formContainer.open {
-    height: 15rem;
-    padding: 1% 0.5%;
-    box-shadow: 2px 2px 6px #666;
     left: 22.5rem;
     top: 0.25%;
   }

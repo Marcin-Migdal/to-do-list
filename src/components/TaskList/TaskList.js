@@ -69,7 +69,7 @@ export default function TaskList({ isFormVisible }) {
     if (sortType === 'completed') {
       text = "You haven't completed any tasks yet";
     } else {
-      text = <>Your to do list is empty, <br /> add new task to change that!</>;
+      text = "Your to do list is empty";
     }
 
     return <p className={styles.taskNotyficationText}>{text}</p>

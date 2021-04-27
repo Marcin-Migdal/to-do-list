@@ -1,45 +1,65 @@
-.taskList {
+.taskListContainer {
   position: absolute;
-  top: 0;
-  left: auto;
   width: 95%;
-  height: fit-content;
-  max-height: 28.75rem;
-  margin-top: 1rem;
-  padding: 0.5rem 0;
-  padding-left: 6px;
   border: 1px solid #cccccc;
-  box-shadow: 2px 2px 6px #555;
-  overflow: scroll;
-  overflow-x: hidden;
+  box-shadow: 2px 2px 6px #777;
   transition: 0.5s;
   background-color: #fff;
+}
+
+.taskList {
+  height: fit-content;
+  max-height: 21.5rem;
+  width: 100%;
+  padding: 0.5rem 0;
   list-style: none;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.taskNotyficationText {
+  text-align: center;
+  margin: 0.5rem;
+}
+
+.myHr {
+  border: none;
+  outline: none;
+  background-color: #bfbfbf;
+  width: 97%;
+  height: 1px;
+  margin: auto;
 }
 
 @media only screen and (min-width: 600px) {
-  .taskList {
+  .taskListContainer {
     width: 22rem;
-    left: 2.5%;
+    left: 4.25%;
   }
 
-  .taskList.slideLeft {
+  .taskListContainer.slideLeft {
     left: 0;
   }
-  
-  .taskCountText {
+
+  .taskNotyficationText {
     font-size: 1.5rem;
+  }
+
+  .myHr { 
+    height: 2px; 
   }
 }
 
 @media only screen and (min-width: 800px) {
-  .taskList {
+  .taskListContainer {
     width: 30rem;
+    left: 3.25%;
   }
 }
 
 @media only screen and (min-width: 1200px) {
-  .taskList {
+  .taskListContainer {
     width: 40rem;
+    left: 2.42%;
   }
 }

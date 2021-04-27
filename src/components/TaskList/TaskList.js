@@ -1,18 +1,102 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import TaskBox from '../TaskBox/TaskBox'
-import ListTaskCounter from '../ListTaskCounter/ListTaskCounter';
+import Footer from '../Footer/Footer';
 import styles from './TaskList.module.css'
-import { DataContext } from '../ContextProvider/ContextProvider';
-import OpenFormBox from '../OpenFormBox/OpenFormBox';
+import { DataContext, SortContext } from '../ContextProvider/ContextProvider';
 
 export default function TaskList({ isFormVisible }) {
-  const [toDoList] = useContext(DataContext);
+  const [toDoList, setToDoList] = useContext(DataContext);
+  const [sortType] = useContext(SortContext);
+  const [localToDoList, setLocalToDoList] = useState();
+
+  useEffect(() => {
+    const setNewToDoList = () => {
+      let newToDoList = [];
+      switch (sortType) {
+        case 'all':
+          newToDoList = toDoList
+          break;
+        case 'completed':
+          newToDoList = sortToDoList(true);
+          break;
+        case 'notCompleted':
+          newToDoList = sortToDoList(false);
+          break;
+      }
+      setLocalToDoList(newToDoList)
+    }
+
+    const sortToDoList = (condition) => {
+      const sortedToDoList = toDoList.filter(task => {
+        if (task.completed === condition) {
+          return task
+        }
+      })
+
+      return sortedToDoList;
+    }
+
+    setNewToDoList()
+  }, [toDoList]);
+
+  const completeTask = taskId => {
+    const newToDoList = [...toDoList];
+
+    newToDoList.forEach(toDoTask => {
+      if (toDoTask.id === taskId) {
+        toDoTask.completed = true;
+      }
+    })
+
+    setToDoList(newToDoList)
+  }
+
+  const selectTask = taskId => {
+    const newToDoList = [...toDoList];
+
+    newToDoList.forEach(task => {
+      if (taskId === task.id) {
+        task.selected = !task.selected;
+      }
+    })
+
+    setToDoList(newToDoList)
+  }
+
+  const Notyfication = () => {
+    let text;
+
+    if (sortType === 'completed') {
+      text = "You haven't completed any tasks yet";
+    } else {
+      text = <>Your to do list is empty, <br /> add new task to change that!</>;
+    }
+
+    return <p className={styles.taskNotyficationText}>{text}</p>
+  }
 
   return (
-    <ul className={isFormVisible ? `${styles.taskList} ${styles.slideLeft}` : styles.taskList}>
-      <OpenFormBox />
-      {toDoList.map((task, index) => <TaskBox key={index} task={task} />)}
-      {toDoList.length < 7 && <ListTaskCounter toDoList={toDoList} />}
-    </ul >
+    <>
+      {localToDoList &&
+        <div className={isFormVisible ? `${styles.taskListContainer} ${styles.slideLeft}` : styles.taskListContainer}>
+          {localToDoList.length < 1 ?
+            <Notyfication /> :
+            <ul className={styles.taskList}>
+              {localToDoList.map((task, index) => {
+                return (
+                  <TaskBox
+                    key={index}
+                    task={task}
+                    completeTask={completeTask}
+                    selectTask={selectTask} />
+                )
+              })}
+            </ul >
+          }
+          <hr className={styles.myHr} />
+          <Footer />
+        </div>
+      }
+    </>
   )
 }

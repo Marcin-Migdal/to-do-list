@@ -45,6 +45,7 @@ body {
   position: relative;
   overflow: hidden;
   transition: 0.5s;
+  color: #777;
 }
 
 ::-webkit-scrollbar {

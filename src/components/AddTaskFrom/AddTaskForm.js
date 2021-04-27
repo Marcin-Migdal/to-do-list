@@ -7,7 +7,7 @@ import backArrow from '../../resourses/backArrow.png'
 export default function AddTaskForm() {
   const [toDoList, setToDoList] = useContext(DataContext);
   const [isFormVisible, setIsFormVisible] = useContext(FormContext);
-  const [taskToEdit] = useContext(EditTaskContext);
+  const { taskToEdit } = useContext(EditTaskContext);
 
   const [taskName, setTaskName] = useState('');
   const [taskDescription, setTaskDescription] = useState('');
@@ -45,23 +45,21 @@ export default function AddTaskForm() {
       title: taskName.trim(),
       description: taskDescription.trim(),
       completed: false,
+      selected: false,
     }
 
     setToDoList([...toDoList, addedTask])
     closeForm()
   }
 
-  const editTask = (e) => {
+  const editTask = e => {
     e.preventDefault();
-    let newToDoList = [];
+    let newToDoList = [...toDoList];
 
-    toDoList.map(toDoTask => {
+    newToDoList.forEach(toDoTask => {
       if (toDoTask.id === taskToEdit.id) {
-        taskToEdit.title = taskName
-        taskToEdit.description = taskDescription
-        newToDoList.push(taskToEdit)
-      } else {
-        newToDoList.push(toDoTask)
+        toDoTask.title = taskName
+        toDoTask.description = taskDescription
       }
     })
 
@@ -79,7 +77,7 @@ export default function AddTaskForm() {
     }}
       className={isFormVisible ? `${styles.formContainer} ${styles.open}` : styles.formContainer}>
       <button type="button" onClick={() => closeForm()} className={styles.iconContainer}>
-        <img src={backArrow} className={styles.backArrowIcon} />
+        <img src={backArrow} className={styles.backArrowIcon} alt="close" />
       </button>
       <p className={styles.title}>{formText}</p>
       <input

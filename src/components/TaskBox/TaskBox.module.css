@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: row;
-  margin: 0 0.35rem 0.5rem 0.35rem;
+  margin: 0 0.35rem 0.5rem calc(6px + 0.35rem);
 }
 
 .container:last-of-type {
@@ -10,44 +10,56 @@
 
 .extendedTaskBox,
 .taskBox {
+  position: relative;
   display: flex;
   flex-direction: column;
   height: 3rem;
   width: 100%;
   margin-right: 0.5rem;
-  padding: 0 0.4rem;
   border: 1px solid #cccccc;
   box-shadow: 1px 1px 3px #888;
-  color: #777;
   background-color: #fff;
   overflow: hidden;
-  transition: 0.5s;
+  transition: 0.4s;
 }
 
 .extendedTaskBox:active,
 .taskBox:active {
-  border-color: #999999;
+  border-color: #b3b3b3;
   box-shadow: 2px 2px 3px #444;
   background-color: #f2f2f2;
   color: #333;
-  transition: 0.25s;
 }
 
 .extendedTaskBox {
   height: 9rem;
+  transition: 0.4s;
 }
 
-.mainBoxContainer {
+.topBoxContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   margin-top: 0.5rem;
+  padding: 0 0.4rem;
+}
+
+.leftTopBoxContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 80%;
+}
+
+.checkBox {
+  margin-left: 0.15rem;
+  cursor: pointer;
 }
 
 .title {
   font-size: 1.35rem;
-  margin-left: 0.2rem;
+  margin-left: 0.25rem;
   text-transform: capitalize;
   white-space: nowrap;
   overflow: hidden;
@@ -55,7 +67,6 @@
 }
 
 .editButton {
-  display: block;
   padding: 0.15rem 0.5rem;
   margin-right: 0.4rem;
   outline: none;
@@ -63,141 +74,89 @@
   color: #ffffff;
   background-color: #ffb340;
   font-size: 1.1rem;
-  transform: 0.5s;
+  transition: 0.5s;
 }
 
 .editButton:active {
   background-color: #ff9900;
-  transform: 0.25s;
+  transition: 0.2s;
   transform: scale(0.95);
 }
 
-.descriptionContainer {
-  width: 100%;
-  margin-top: 0.3rem;
-  padding: 0.4rem 0.4rem 0 0.2rem;
+.bottomBoxContainer {
+  position: absolute;
+  top: 3rem;
+  left: 2%;
+  width: 96%;
+  padding: 0 0.35rem;
   border: 0 solid #999;
   border-top-width: 2px;
 }
 
 .description {
   display: inline-block;
-  height: 5rem;
+  height: 5.75rem;
   font-size: 1.1rem;
   overflow: scroll;
   overflow-x: hidden;
 }
 
-.completeButton {
-  display: flex;
-  align-items: center;
-  height: 3rem;
-  padding: 0 0.5rem;
-  outline: none;
-  border: none;
-  background-color: #51d451;
-  box-shadow: 1px 1px 3px #888;
-  transition: 0.5s;
-}
-
-.completeButton:active {
-  background-color: #2eb82e;
-  box-shadow: 1px 1px 4px #444;
-  transition: 0.2s;
-  transform: scale(0.95);
-}
-
-.completeDisabledButton {
-  display: flex;
-  align-items: center;
-  height: 3rem;
-  padding: 0 0.5rem;
-  outline: none;
-  border: none;
-  background-color: #999;
-  box-shadow: 1px 1px 3px #888;
-  transition: 0.5s;
-}
-
-.completeIcon {
-  width: 1.75rem;
-}
-
 @media only screen and (min-width: 600px) {
   .container {
-    margin: 0 0.5rem 0.5rem 0.5rem;
+    margin: 0 0.5rem 0.5rem calc(6px + 0.5rem);
   }
+
   .extendedTaskBox,
   .taskBox {
-    height: 3rem;
     cursor: pointer;
+    transition: 0.3s;
   }
 
   .taskBox:hover {
-    border-color: #b3b3b3;
+    border-color: #bfbfbf;
     box-shadow: 2px 2px 5px #666;
     background-color: #f8f8f8;
     color: #555;
-    transition: 0.4s;
+    transition: 0.3s;
   }
+
   .extendedTaskBox:active,
   .taskBox:active {
-    border-color: #999999;
+    border-color: #b3b3b3;
     box-shadow: 2px 2px 7px #444;
     background-color: #f2f2f2;
     color: #333;
-    transition: 0.2s;
   }
 
   .extendedTaskBox {
     height: 9rem;
-  }
-
-  .container:first-of-type .taskBox {
-    justify-content: center;
-    align-items: center;
-  }
-
-  .addNewTaskTitle {
-    font-size: 2.75rem;
-    margin: 0;
+    transition: 0.4s;
   }
 
   .title {
     font-size: 1.45rem;
+    margin-left: 0.4rem;
   }
 
   .editButton {
     cursor: pointer;
   }
 
-  .descriptionContainer {
-    width: 100%;
-    margin-top: 0.5rem;
-    padding: 0.4rem 0.4rem 0 0.2rem;
-  }
-
-  .description {
-    height: 5rem;
-  }
-
-  .completeButton {
-    cursor: pointer;
-  }
-
-  .completeButton:hover {
-    background-color: #2eb82e;
-    box-shadow: 2px 2px 5px #666;
+  .editButton:hover {
+    background-color: #ffa31a;
     transition: 0.4s;
   }
 
-  .completeButton:active {
-    background-color: #29a329;
-    box-shadow: 2px 2px 7px #444;
+  .editButton:active {
+    background-color: #ff9900;
     transition: 0.2s;
   }
 
-  .completeIcon {
-    width: 2rem;
+  .bottomBoxContainer { 
+    top: 3rem;
+  }
+
+  .description {
+    height: 5.25rem;
   }
 }

@@ -64,15 +64,14 @@ export default function TaskList({ isFormVisible }) {
   }
 
   const Notyfication = () => {
-    let text;
-
-    if (sortType === 'completed') {
-      text = "You haven't completed any tasks yet";
-    } else {
-      text = "Your to do list is empty";
-    }
-
-    return <p className={styles.taskNotyficationText}>{text}</p>
+    return (
+      <>
+        {sortType === 'completed' ?
+          <p className={styles.taskNotyficationText}>You haven't completed any tasks yet</p> :
+          <p className={styles.taskNotyficationText}>Your to do list is empty</p>
+        }
+      </>
+    )
   }
 
   return (

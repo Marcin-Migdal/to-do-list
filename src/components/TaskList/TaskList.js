@@ -14,7 +14,7 @@ export default function TaskList({ isFormVisible }) {
       let newToDoList = [];
       switch (sortType) {
         case 'all':
-          newToDoList = toDoList
+          newToDoList = seperateCompletedTasks()
           break;
         case 'completed':
           newToDoList = sortToDoList(true);
@@ -25,6 +25,24 @@ export default function TaskList({ isFormVisible }) {
       }
       setLocalToDoList(newToDoList)
     }
+
+    const seperateCompletedTasks = () => {
+      let completedTaskList = [];
+      let newToDoList = [];
+
+      toDoList.forEach(task => {
+        if (task.completed) {
+          completedTaskList.push(task)
+        } else {
+          newToDoList.push(task)
+        }
+      })
+
+      newToDoList.push(...completedTaskList)
+ 
+      return newToDoList;
+    }
+
 
     const sortToDoList = (condition) => {
       const sortedToDoList = toDoList.filter(task => {
